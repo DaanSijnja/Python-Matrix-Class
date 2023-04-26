@@ -5,6 +5,7 @@ class Matrix:
 
     def Zeros(rows,columns):
         ''''Returns a zero filled matrix of size'''
+
         matout = []
         #loop through the rows an columns
         for row in range(rows):
@@ -99,12 +100,28 @@ class Matrix:
                 matout.value[row][column] = self.value[row][column] - other.value[row][column]
 
         return matout
-        
+    
+    def __rmul__(self, other):
+        '''Multiplication with floats and ints'''
+        if(isinstance(other,(int,float))):
+            r, c = self.GetRowColumn()
+            matout = Matrix.Zeros(r,c)
+
+            for row in range(r):
+                for column in range(c):
+                    matout.value[row][column] = self.value[row][column] * other
+
+            return matout
+
+        else:
+            if(type(other) is not Matrix):
+                raise Exception(f'Cant multiply a Matrix with a {type(other)} type')
+
         
     
     def __mul__(self,_other):
         ''''Multiply override'''
-        
+
         #checks of de matixen compatiable zijn
         if(self.GetRowColumn()[1] == _other.GetRowColumn()[0]):
             #compatiable
@@ -137,7 +154,6 @@ class Matrix:
             temp.append([])
             for b in range(c):
                 _str = ("%.5f" % (self.value[a][b]))
-                print(_str)
                 temp[a].append(len(_str))
         
         maxValue = 0
@@ -157,3 +173,22 @@ class Matrix:
             output += "] \n"
         
         return output
+
+
+
+A = Matrix([
+    [1,1,1,1,1],
+    [1,1,1,1,1],
+    [1,1,1,1,1],
+    ]
+    )
+B = Matrix([
+    [2,2],
+    [2,2],
+    [2,2],
+    [2,2],
+    [2,2]
+    ])
+
+print(A)
+print(A*B)
