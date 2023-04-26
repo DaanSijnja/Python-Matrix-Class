@@ -81,9 +81,25 @@ class Matrix:
 
         for row in range(rows):
             for column in range(columns):
-                matout[row][column] = self.value[row][column] + other.value[row][column]
+                matout.value[row][column] = self.value[row][column] + other.value[row][column]
 
         return matout
+    
+    def __sub__(self, other):
+        '''Subtract Override'''
+        if(self.GetRowColumn() != other.GetRowColumn()):
+            raise Exception("Matrixes doesn't have the same dimenions")
+        
+        rows, columns = self.GetRowColumn()
+
+        matout = Matrix.Zeros(rows,columns)
+
+        for row in range(rows):
+            for column in range(columns):
+                matout.value[row][column] = self.value[row][column] - other.value[row][column]
+
+        return matout
+        
         
     
     def __mul__(self,_other):
@@ -141,53 +157,3 @@ class Matrix:
             output += "] \n"
         
         return output
-
-
-
-
-
-
-
-        
-
-A = Matrix(
-    [
-    [100,100,1],
-    [0,100,1],
-    [-100,100,1],
-    [100,0,1],
-    [0,0,1],
-    [-100,0,1],
-    [100,-100,1],
-    [0,-100,1],
-    [-100,-100,1]
-    ]
-)
-
-B = Matrix(
-        [
-            [-10,-1]
-        ]
-
-)
-
-
-AT = A.Transpose()
-
-ATA = AT*A
-
-INVERSEATA = ATA.Inverse()
-
-BANAAN = INVERSEATA*AT
-
-print(A)
-
-
-
-
-
-
-
-
-
-
