@@ -1,7 +1,9 @@
 class Matrix:
     value = []
+    
     def __init__(self,_value):
         self.value = _value
+        
 
     def Zeros(rows,columns):
         ''''Returns a zero filled matrix of size'''
@@ -29,6 +31,7 @@ class Matrix:
                 matout.value[j][i] = self.value[i][j]
 
         return matout
+        
     
     def Inverse(self):
         '''Returns the inverse of it self'''
@@ -176,19 +179,3 @@ class Matrix:
 
 
 
-A = Matrix([
-    [1,1,1,1,1],
-    [1,1,1,1,1],
-    [1,1,1,1,1],
-    ]
-    )
-B = Matrix([
-    [2,2],
-    [2,2],
-    [2,2],
-    [2,2],
-    [2,2]
-    ])
-
-print(A)
-print(A*B)
